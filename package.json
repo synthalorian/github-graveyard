@@ -1,0 +1,35 @@
+{
+  "name": "github-graveyard",
+  "version": "1.0.0",
+  "description": "A hauntingly beautiful 3D interactive cemetery for forgotten GitHub repositories.",
+  "author": "Your Name <your.email@example.com>",
+  "license": "MIT",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/yourusername/github-graveyard.git"
+  },
+  "bugs": {
+    "url": "https://github.com/yourusername/github-graveyard/issues"
+  },
+  "homepage": "https://yourusername.github.io/github-graveyard/",
+  "keywords": [
+    "github",
+    "threejs",
+    "3d",
+    "visualization",
+    "graveyard",
+    "cemetery",
+    "abandoned-repos"
+  ],
+  "devDependencies": {
+    "@types/three": "^0.184.1",
+    "three": "^0.184.0",
+    "vite": "^8.0.12"
+  }
+}
