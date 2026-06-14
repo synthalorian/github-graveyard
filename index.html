@@ -1,0 +1,54 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>GitHub Graveyard — 3D Cemetery for Forgotten Repos</title>
+    <meta name="description" content="A hauntingly beautiful 3D interactive cemetery where forgotten GitHub repositories lie in eternal rest. Wander, explore, and resurrect dead projects." />
+    <meta name="author" content="Your Name" />
+    <meta name="keywords" content="GitHub, Three.js, 3D, visualization, graveyard, abandoned repos, cemetery" />
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="GitHub Graveyard" />
+    <meta property="og:description" content="A hauntingly beautiful 3D interactive cemetery where forgotten GitHub repositories lie in eternal rest." />
+    <meta property="og:image" content="https://yourusername.github.io/github-graveyard/og-image.png" />
+    <meta property="og:url" content="https://yourusername.github.io/github-graveyard/" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="GitHub Graveyard" />
+    <meta name="twitter:description" content="A hauntingly beautiful 3D interactive cemetery where forgotten GitHub repositories lie in eternal rest." />
+    <meta name="twitter:image" content="https://yourusername.github.io/github-graveyard/og-image.png" />
+    <style>
+      html, body { margin: 0; padding: 0; overflow: hidden; background: #0a0a0a; font-family: 'Georgia', serif; }
+      #app { width: 100vw; height: 100vh; }
+      #overlay {
+        position: absolute; top: 0; left: 0; width: 100%; pointer-events: none;
+        display: flex; flex-direction: column; align-items: center; padding-top: 1rem;
+        color: #e0e0e0; text-shadow: 0 0 8px #000; z-index: 10;
+      }
+      #overlay h1 { margin: 0; font-size: 2rem; letter-spacing: 0.2rem; }
+      #overlay p { margin: 0.5rem 0 0; font-size: 0.9rem; opacity: 0.7; }
+      #tooltip {
+        position: absolute; pointer-events: none; background: rgba(0,0,0,0.8);
+        color: #fff; padding: 0.8rem 1rem; border-radius: 4px; border: 1px solid #444;
+        font-size: 0.85rem; display: none; max-width: 300px; z-index: 20;
+      }
+      #tooltip .repo-name { font-weight: bold; color: #b0b0b0; margin-bottom: 0.3rem; }
+      #tooltip .repo-desc { opacity: 0.8; margin-bottom: 0.3rem; }
+      #tooltip .repo-meta { font-size: 0.75rem; opacity: 0.6; }
+      #loading {
+        position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);
+        color: #aaa; font-size: 1.2rem; z-index: 30; pointer-events: none;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="app"></div>
+    <div id="overlay">
+      <h1>GitHub Graveyard</h1>
+      <p>Wander the cemetery. Click a tombstone to resurrect a forgotten repo.</p>
+    </div>
+    <div id="tooltip"></div>
+    <div id="loading">Summoning the dead...</div>
+    <script type="module" src="/src/main.js"></script>
+  </body>
+</html>
