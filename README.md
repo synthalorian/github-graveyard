@@ -4,7 +4,7 @@
 
 A hauntingly beautiful 3D interactive cemetery where forgotten GitHub repositories lie in eternal rest. Wander through the fog, read the epitaphs, and click any tombstone to resurrect a dead project by opening a resurrection issue.
 
-[![Live Demo](https://img.shields.io/badge/Live%20Demo-GitHub%20Pages-2ea44f?style=for-the-badge&logo=github)](https://yourusername.github.io/github-graveyard/)
+[![Live Demo](https://img.shields.io/badge/Live%20Demo-GitHub%20Pages-2ea44f?style=for-the-badge&logo=github)](https://synthalorian.github.io/github-graveyard/)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg?style=for-the-badge)](LICENSE)
 [![Built with Three.js](https://img.shields.io/badge/Built%20with-Three.js-black?style=for-the-badge&logo=three.js)](https://threejs.org/)
 
@@ -34,7 +34,7 @@ A hauntingly beautiful 3D interactive cemetery where forgotten GitHub repositori
 
 ```bash
 # Clone the repository
-git clone https://github.com/yourusername/github-graveyard.git
+git clone https://github.com/synthalorian/github-graveyard.git
 cd github-graveyard
 
 # Install dependencies
@@ -70,7 +70,7 @@ Please read [CONTRIBUTING.md](CONTRIBUTING.md) for guidelines.
 
 ## 📄 License
 
-[MIT](LICENSE) © [Your Name](https://github.com/yourusername)
+[MIT](LICENSE) © [synthalorian](https://github.com/synthalorian)
 
 ---
 
