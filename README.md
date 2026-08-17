@@ -70,7 +70,7 @@ Please read [CONTRIBUTING.md](CONTRIBUTING.md) for guidelines.
 
 ## 📄 License
 
-[MIT](LICENSE) © [synthalorian](https://github.com/synthalorian)
+[MIT](LICENSE) © [synth](https://github.com/synthalorian)
 
 ---
 
