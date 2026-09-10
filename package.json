@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "description": "A hauntingly beautiful 3D interactive cemetery for forgotten GitHub repositories.",
   "author": "Your Name <your.email@example.com>",
-  "license": "MIT",
+  "license": "Apache-2.0",
   "type": "module",
   "scripts": {
     "dev": "vite",

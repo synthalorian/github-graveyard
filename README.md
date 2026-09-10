@@ -5,7 +5,7 @@
 A hauntingly beautiful 3D interactive cemetery where forgotten GitHub repositories lie in eternal rest. Wander through the fog, read the epitaphs, and click any tombstone to resurrect a dead project by opening a resurrection issue.
 
 [![Live Demo](https://img.shields.io/badge/Live%20Demo-GitHub%20Pages-2ea44f?style=for-the-badge&logo=github)](https://synthalorian.github.io/github-graveyard/)
-[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg?style=for-the-badge)](LICENSE)
+[![License: Apache 2.0](https://img.shields.io/badge/License-Apache_2.0-blue.svg?style=for-the-badge)](LICENSE)
 [![Built with Three.js](https://img.shields.io/badge/Built%20with-Three.js-black?style=for-the-badge&logo=three.js)](https://threejs.org/)
 
 ![Screenshot](public/og-image.png)
@@ -70,7 +70,7 @@ Please read [CONTRIBUTING.md](CONTRIBUTING.md) for guidelines.
 
 ## 📄 License
 
-[MIT](LICENSE) © [synth](https://github.com/synthalorian)
+[Apache-2.0](LICENSE) © [synth](https://github.com/synthalorian)
 
 ---
 
