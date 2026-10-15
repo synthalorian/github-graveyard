@@ -1,3 +1,5 @@
+![github-graveyard](.github/preview.png)
+
 # GitHub Graveyard 🪦
 
 > *"Every repo has a story. Some are just resting."*
