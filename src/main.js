@@ -318,7 +318,7 @@ function animate() {
   if (keys.s) camera.position.addScaledVector(forward, -speed);
   if (keys.a) camera.position.addScaledVector(right, -speed);
   if (keys.d) camera.position.addScaledVector(right, speed);
-  if (TOUR) { const t=(performance.now()-TOUR0)/1000; camera.position.z = 12 - t*0.9; camera.position.x = 2.0*Math.sin(t*0.25); yaw = 0.35*Math.sin(t*0.4); pitch = -0.12; }
+  if (TOUR) { const t=(performance.now()-TOUR0)/1000; camera.position.z = 12 - t*0.5; camera.position.x = 2.0*Math.sin(t*0.25); yaw = 0.35*Math.sin(t*0.4); pitch = -0.12; }
   camera.position.y = 2.5;
 
   camera.rotation.order = 'YXZ';
