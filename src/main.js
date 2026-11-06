@@ -9,13 +9,14 @@ renderer.shadowMap.enabled = true;
 renderer.shadowMap.type = THREE.PCFSoftShadowMap;
 document.getElementById('app').appendChild(renderer.domElement);
 
-scene.background = new THREE.Color(0x05070a);
-scene.fog = new THREE.FogExp2(0x05070a, 0.035);
+scene.background = new THREE.Color(0x1a2238);
+scene.fog = new THREE.FogExp2(0x1a2238, 0.016);
 
-const ambientLight = new THREE.AmbientLight(0x1a1a2e, 0.6);
+const ambientLight = new THREE.AmbientLight(0x8090c0, 1.4);
 scene.add(ambientLight);
+scene.add(new THREE.HemisphereLight(0xaab8e0, 0x30402a, 1.0));
 
-const moonLight = new THREE.DirectionalLight(0x8899bb, 0.8);
+const moonLight = new THREE.DirectionalLight(0xc8d4f0, 1.8);
 moonLight.position.set(20, 40, 10);
 moonLight.castShadow = true;
 moonLight.shadow.mapSize.width = 2048;
@@ -37,7 +38,7 @@ for (let i = 0; i < posAttr.count; i++) {
   posAttr.setZ(i, z);
 }
 groundGeo.computeVertexNormals();
-const groundMat = new THREE.MeshStandardMaterial({ color: 0x1a1f1a, roughness: 0.9 });
+const groundMat = new THREE.MeshStandardMaterial({ color: 0x34402f, roughness: 0.9 });
 const ground = new THREE.Mesh(groundGeo, groundMat);
 ground.rotation.x = -Math.PI / 2;
 ground.receiveShadow = true;
@@ -77,7 +78,7 @@ scene.add(tombstoneGroup);
 function createTombstone(repo, x, z) {
   const group = new THREE.Group();
   const baseGeo = new THREE.BoxGeometry(1.2, 0.2, 0.8);
-  const stoneMat = new THREE.MeshStandardMaterial({ color: 0x4a4a4a, roughness: 0.9 });
+  const stoneMat = new THREE.MeshStandardMaterial({ color: 0x8a8a92, roughness: 0.85 });
   const base = new THREE.Mesh(baseGeo, stoneMat);
   base.position.y = 0.1;
   base.castShadow = true;
@@ -103,20 +104,20 @@ function createTombstone(repo, x, z) {
   canvas.width = 512;
   canvas.height = 256;
   const ctx = canvas.getContext('2d');
-  ctx.fillStyle = '#3a3a3a';
+  ctx.fillStyle = '#4a4a52';
   ctx.fillRect(0, 0, 512, 256);
-  ctx.fillStyle = '#888';
+  ctx.fillStyle = '#f2f2f2';
   ctx.font = 'bold 32px Georgia';
   ctx.textAlign = 'center';
   const name = repo.name.length > 20 ? repo.name.slice(0, 18) + '..' : repo.name;
   ctx.fillText(name, 256, 80);
   ctx.font = '20px Georgia';
-  ctx.fillStyle = '#666';
+  ctx.fillStyle = '#d0d0d8';
   const lang = repo.language || 'Unknown';
   ctx.fillText(`Language: ${lang}`, 256, 120);
   const date = new Date(repo.updatedAt).getFullYear();
   ctx.fillText(`Died: ${date}`, 256, 160);
-  ctx.fillStyle = '#555';
+  ctx.fillStyle = '#c0c0c8';
   ctx.font = '16px Georgia';
   const stars = `Stars: ${repo.stargazerCount}`;
   ctx.fillText(stars, 256, 200);
@@ -174,12 +175,22 @@ async function fetchGraveyardRepos() {
   }));
 }
 
+// ?owners=user1,user2 limits the graveyard to those accounts' zero-star repos
+const OWNERS = (new URLSearchParams(location.search).get('owners') || '')
+  .split(',').map(s => s.trim()).filter(Boolean);
+
 async function fetchFallbackRepos() {
-  const res = await fetch('https://api.github.com/search/repositories?q=stars:0+pushed:<2023-01-01&sort=updated&order=asc&per_page=30');
+  const q = OWNERS.length
+    ? OWNERS.map(o => `user:${encodeURIComponent(o)}`).join('+') + '+stars:0'
+    : 'stars:0+pushed:<2023-01-01';
+  const res = await fetch(`https://api.github.com/search/repositories?q=${q}&sort=updated&order=asc&per_page=30`);
   const json = await res.json();
-  return (json.items || []).map(item => ({
+  const lower = OWNERS.map(o => o.toLowerCase());
+  return (json.items || [])
+    .filter(item => !lower.length || lower.includes(item.owner.login.toLowerCase()))
+    .map(item => ({
     id: item.id,
-    name: item.full_name,
+    name: OWNERS.length ? item.name : item.full_name,
     owner: { login: item.owner.login },
     description: item.description,
     stargazerCount: item.stargazers_count,
@@ -192,7 +203,7 @@ async function fetchFallbackRepos() {
 async function loadRepos() {
   let repos = [];
   try {
-    repos = await fetchGraveyardRepos();
+    if (!OWNERS.length) repos = await fetchGraveyardRepos();
   } catch (e) {
     console.warn('GraphQL failed, falling back to REST', e);
   }
@@ -244,6 +255,8 @@ function layoutTombstones(repos) {
 }
 
 camera.position.set(0, 2.5, 12);
+const TOUR = new URLSearchParams(location.search).has('tour');
+const TOUR0 = performance.now();
 
 const keys = { w: false, a: false, s: false, d: false };
 window.addEventListener('keydown', e => {
@@ -305,13 +318,14 @@ function animate() {
   if (keys.s) camera.position.addScaledVector(forward, -speed);
   if (keys.a) camera.position.addScaledVector(right, -speed);
   if (keys.d) camera.position.addScaledVector(right, speed);
+  if (TOUR) { const t=(performance.now()-TOUR0)/1000; camera.position.z = 12 - t*0.5; camera.position.x = 2.0*Math.sin(t*0.25); yaw = 0.35*Math.sin(t*0.4); pitch = -0.12; }
   camera.position.y = 2.5;
 
   camera.rotation.order = 'YXZ';
   camera.rotation.y = yaw;
   camera.rotation.x = pitch;
 
-  if (isPointerLocked) {
+  if (isPointerLocked || TOUR) {
     raycaster.setFromCamera(new THREE.Vector2(0, 0), camera);
     const hits = raycaster.intersectObjects(tombstoneGroup.children, true);
     if (hits.length) {
